@@ -1,0 +1,16 @@
+% Facts
+person(john). % John is a person
+glucose_level(john, 110). % John has a glucose level of 110.
+blood_pressure(john, 110, 80). % John has a blood pressure of 110/80.
+
+% Rules
+hypertension(Patient) :-
+    blood_pressure(Patient, Systolic, Diastolic),
+    Systolic >= 140,
+    Diastolic >= 90.
+prediabetes(Patient) :-
+    glucose_level(Patient, Glucose),
+    Glucose >= 100,
+    Glucose =< 125.
+at_risk(Patient) :- % A person is at risk if they have either pre-diabetes or hypertension.
+    (prediabetes(Patient); hypertension(Patient)).
